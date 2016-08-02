@@ -34,7 +34,7 @@ use Ramsey\Uuid\Uuid;
  * Class XarfAbstract
  * @package iDimensionz\Xarf
  */
-class XarfAbstract implements \JsonSerializable
+abstract class XarfAbstract implements \JsonSerializable
 {
     const XARF_VERSION = '0.2';
 
@@ -50,10 +50,6 @@ class XarfAbstract implements \JsonSerializable
     const XARF_ATTACHMENT_TEXT_PLAIN = 'text/plain';
     const XARF_ATTACHMENT_RFC822 = 'message/rfc822';
 
-    /**
-     * @var string
-     */
-    private $json;
     /**
      * @var string
      */
