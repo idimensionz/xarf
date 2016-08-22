@@ -1,4 +1,9 @@
 {
+    "name": "idimensionz/xarf",
+    "type": "library",
+    "description": "Implementation of x-arf (Network Abuse Reporting) specfication in PHP",
+    "keywords": ["xarf", "x-arf", "abuse"],
+    "homepage": "https://github.com/idimensionz/xarf",
     "require": {
         "ramsey/uuid": "^3.4"
     },
