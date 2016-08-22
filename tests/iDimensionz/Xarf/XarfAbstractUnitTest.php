@@ -26,9 +26,10 @@
  * SOFTWARE.
 */
 
-namespace Test\iDimensionz\Xarf;
+namespace Tests\iDimensionz\Xarf;
 
 use iDimensionz\Xarf\XarfAbstract;
+use Ramsey\Uuid\Uuid;
 
 class XarfAbstractUnitTest extends \PHPUnit_Framework_TestCase
 {
@@ -53,5 +54,62 @@ class XarfAbstractUnitTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(XarfAbstract::XARF_VERSION, $this->xarfAbstract->getVersion());
         $this->assertEquals(XarfAbstract::XARF_ATTACHMENT_NONE, $this->xarfAbstract->getAttachment());
+    }
+
+    public function testReportedFromGetterAndSetter()
+    {
+        $validReportedFrom = 'some valid value';
+        $this->xarfAbstract->setReportedFrom($validReportedFrom);
+        $actualReportedFrom = $this->xarfAbstract->getReportedFrom();
+        $this->assertEquals($validReportedFrom, $actualReportedFrom);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetCategoryThrowsExceptionWhenCategoryInvalid()
+    {
+        $invalidCategory = 'not a valid category';
+        $this->xarfAbstract->setCategory($invalidCategory);
+    }
+
+    public function testCategoryGetterAndSetter()
+    {
+        $validCategories = array(
+            XarfAbstract::XARF_CATEGORY_ABUSE,
+            XarfAbstract::XARF_CATEGORY_FRAUD,
+            XarfAbstract::XARF_CATEGORY_INFO,
+        );
+        foreach ($validCategories as $validCategory) {
+            $this->xarfAbstract->setCategory($validCategory);
+            $actualCategory = $this->xarfAbstract->getCategory();
+            $this->assertEquals($validCategory, $actualCategory);
+        }
+    }
+
+    public function testReportTypeGetterAndSetter()
+    {
+        $validReportType = 'some valid report type';
+        $this->xarfAbstract->setReportType($validReportType);
+        $actualReportType = $this->xarfAbstract->getReportType();
+        $this->assertEquals($validReportType, $actualReportType);
+    }
+
+    public function testUserAgentGetterAndSetter()
+    {
+        $validUserAgent = 'some valid user agent';
+        $this->xarfAbstract->setUserAgent($validUserAgent);
+        $actualUserAgent = $this->xarfAbstract->getUserAgent();
+        $this->assertEquals($validUserAgent, $actualUserAgent);
+    }
+
+    public function testReportIdGetterAndSetter()
+    {
+        $topLevelDomain = 'mydomain.com';
+        $uuid = Uuid::uuid3(Uuid::NAMESPACE_DNS, $topLevelDomain);
+        $expectedReportId = $uuid->toString() . '@' . $topLevelDomain;
+        $this->xarfAbstract->setReportId($topLevelDomain);
+        $actualReportId = $this->xarfAbstract->getReportId();
+        $this->assertEquals($expectedReportId, $actualReportId);
     }
 }

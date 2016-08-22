@@ -26,8 +26,7 @@
  * SOFTWARE.
 */
 
-namespace Test\iDimensionz\Xarf;
-
+namespace Tests\iDimensionz\Xarf;
 
 use iDimensionz\Xarf\XarfAbstract;
 
@@ -40,6 +39,31 @@ class XarfAbstractTestStub extends XarfAbstract
 
     public function getAttachment()
     {
-        return parent::getVersion();
+        return parent::getAttachment();
+    }
+
+    public function getReportedFrom()
+    {
+        return parent::getReportedFrom();
+    }
+
+    public function getCategory()
+    {
+        return parent::getCategory();
+    }
+
+    public function getReportType()
+    {
+        return parent::getReportType();
+    }
+
+    public function getUserAgent()
+    {
+        return parent::getUserAgent();
+    }
+
+    public function getReportId()
+    {
+        return parent::getReportId();
     }
 }
